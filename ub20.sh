@@ -64,7 +64,7 @@ logofigh() {
     echo -e " ───│    $Green┌─┐┬ ┬┌┬┐┌─┐┌─┐┌─┐┬─┐┬┌─┐┌┬┐  ┬  ┬┌┬┐┌─┐$NC   │───"
     echo -e " ───│    $Green├─┤│ │ │ │ │└─┐│  ├┬┘│├─┘ │   │  │ │ ├┤ $NC   │───"
     echo -e " ───│    $Green┴ ┴└─┘ ┴ └─┘└─┘└─┘┴└─┴┴   ┴   ┴─┘┴ ┴ └─┘$NC   │───"
-    echo -e "    │    ${YELLOW}Copyright${FONT} (C)${GRAY}https://t.me/devilstunnels$NC   │"
+    echo -e "    │    ${YELLOW}Copyright${FONT} (C)${GRAY}https://t.me/devilstunnels$NC    │"
     echo -e "    └───────────────────────────────────────────────┘"
     echo -e "         ${BLUE}Autoscript xray vpn lite (multi port)${FONT}    "
     echo -e "${BLUE}Make sure the internet is smooth when installing the script${FONT}"
@@ -122,7 +122,7 @@ make_folder_xray() {
 add_name() {
 clear
 echo -e  "${BLUE}┌──────────────────────────────────────────┐${NC}"
-echo -e  "${YELLOW}|       MASUKKAN NAMA AUTHOR            |${NC}"
+echo -e  "${YELLOW}|       MASUKKAN NAMA AUTHOR               |${NC}"
 echo -e  "${BLUE}└──────────────────────────────────────────┘${NC}"
 echo " "
 read -rp "Masukan Nama Anda Disini : " -e pp
