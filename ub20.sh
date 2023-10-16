@@ -122,7 +122,7 @@ make_folder_xray() {
 add_name() {
 clear
 echo -e  "${BLUE}┌──────────────────────────────────────────┐${NC}"
-echo -e  "${YELLOW}|       MASUKKAN NAMA AUTHOR        |${NC}"
+echo -e  "${YELLOW}|       MASUKKAN NAMA AUTHOR            |${NC}"
 echo -e  "${BLUE}└──────────────────────────────────────────┘${NC}"
 echo " "
 read -rp "Masukan Nama Anda Disini : " -e pp
@@ -446,9 +446,9 @@ account default
 host smtp.gmail.com
 port 587
 auth on
-user sc.fightertunnel@gmail.com
-from sc.fightertunnel@gmail.com
-password uxiwsmmaladzsywx
+user csordervpn@gmail.com
+from csordervpn@gmail.com
+password 03juni1998
 logfile ~/.msmtp.log
 
 EOF
@@ -569,18 +569,18 @@ restart_system() {
     TIMEZONE=$(printf '%(%H:%M:%S)T')
     TEXT="
 <code>────────────────────</code>
-<b>⚠️AUTOSCRIPT DEVILS TUNNEL⚠️</b>
+<b>✔AUTOSCRIPT DEVILS TUNNEL✔️</b>
 <code>────────────────────</code>
-<code>ID     : </code><code>$USRSC</code>
-<code>Domain : </code><code>$domain</code>
-<code>Date   : </code><code>$TIME</code>
-<code>Time   : </code><code>$TIMEZONE</code>
-<code>Ip vps : </code><code>$ipsaya</code>
-<code>Exp Sc : </code><code>$EXPSC</code>
+<code>🆔ID     : </code><code>$USRSC</code>
+<code>📧Domain : </code><code>$domain</code>
+<code>📅Date   : </code><code>$TIME</code>
+<code>⏲️Time   : </code><code>$TIMEZONE</code>
+<code>🌐Ip vps : </code><code>$ipsaya</code>
+<code>⏰Exp Sc : </code><code>$EXPSC</code>
 <code>────────────────────</code>
 <i>Automatic Notification from</i>
-<i>Gitlab Devils Tunnel</i>
-"'&reply_markup={"inline_keyboard":[[{"text":"ᴏʀᴅᴇʀ🐳","url":"https://t.me/devilstunnels"},{"text":"ɪɴꜱᴛᴀʟʟ🐬","url":"https://t.me/devilstunnels"}]]}'
+<i>Devils Tunnel</i>
+"'&reply_markup={"inline_keyboard":[[{"text":"ᴏʀᴅᴇʀ🐳","url":"https://t.me/devilstunnels"},{"text":"GRꜱUP🐬","url":"https://t.me/rizyulvpn"}]]}'
     curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
     cp /etc/openvpn/*.ovpn /var/www/html/
     sed -i "s/xxx/${domain}/g" /etc/nginx/conf.d/xray.conf
