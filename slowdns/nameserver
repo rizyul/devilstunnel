@@ -1,13 +1,13 @@
 #!/bin/sh
-REPOS="https://raw.githubusercontent.com/ppnhss/haproxy/main/"
+REPOS="https://raw.githubusercontent.com/rizyul/devilstunnel/main/"
 ns_domain_cloudflare() {
-	DOMAIN="bagusid.my.id"
+	DOMAIN="cloudrzs.my.id"
 	DOMAIN_PATH=$(cat /etc/xray/domain)
 	SUB=$(tr </dev/urandom -dc a-z0-9 | head -c7)
-	SUB_DOMAIN=${SUB}."bagusid.my.id"
+	SUB_DOMAIN=${SUB}."cloudrzs.my.id"
 	NS_DOMAIN=dns.${SUB_DOMAIN}
-	CF_ID=putrameratus2@gmail.com
-        CF_KEY=69c3940d1896bc19698277104e783dab6cee4
+	CF_ID=prarizki9@gmail.com
+        CF_KEY=8c5d17794ccaee71d0e79e09dae8fb23f3e92
 	set -euo pipefail
 	IP=$(wget -qO- ipinfo.io/ip)
 	echo "Updating DNS NS for ${NS_DOMAIN}..."
