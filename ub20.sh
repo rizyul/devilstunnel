@@ -164,8 +164,6 @@ echo "IP=$host" >> /var/lib/kyt/ipvps.conf
 echo "$host" >> /root/domain
 clear
     fi
- # "Installed slowdns"
-    wget -q -O /etc/nameserver "https://github.com/rizyul/devilstunnel/main/slowdns/nameserver" && bash /etc/nameserver >/dev/null 2>&1	
 }
 
 apete_apdet() {
@@ -314,6 +312,9 @@ print_install "Memasang SSL Pada Domain"
     ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
     chmod 777 /etc/xray/xray.key
     print_success "SSL Certificate"
+     # "Installed slowdns"
+    wget -q -O /etc/nameserver "https://github.com/rizyul/devilstunnel/raw/main/slowdns/nameserver" && bash /etc/nameserver >/dev/null 2>&1
+
 }
 
 ins_menu() {
