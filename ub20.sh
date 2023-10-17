@@ -147,14 +147,9 @@ echo -e""
 read -rp "Choose Your Domain Installation : " dom 
 
 if test $dom -eq 1; then
-clear
 wget -q -O /root/cf.sh "https://raw.githubusercontent.com/rizyul/devilstunnel/main/ssh/slhost.sh"
 chmod +x /root/slhost.sh
 ./slhost.sh
-#elif test $dom -eq 2; then
-#wget -q -O /root/cf1.sh "https://raw.githubusercontent.com/rizyulstore/v4/main/cf1.sh"
-#chmod +x /root/cf1.sh
-#./cf1.sh
 elif test $dom -eq 3; then
 read -rp "Domain/Host: " -e host
 echo "IP=$host" >> /var/lib/crot/ipvps.conf
