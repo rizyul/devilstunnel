@@ -2,7 +2,7 @@
 # Script By SL
 # 2022 SLOWDNS
 # ===============================================
-wget https://raw.githubusercontent.com/givps/autoset/master/SLDNS/slhostdns.sh && chmod +x slhostdns.sh && ./slhostdns.sh
+wget https://raw.githubusercontent.com/rizyul/devilstunnel/main/SLDNS/slhostdns.sh && chmod +x slhostdns.sh && ./slhostdns.sh
 nameserver=$(cat /root/nsdomain)
 apt update -y
 apt install -y python3 python3-dnslib net-tools
@@ -24,20 +24,20 @@ apt install -y dos2unix debconf-utils
 service cron reload
 service cron restart
 #sl-fix
-cd /usr/bin
-wget -O sl-fix "https://raw.githubusercontent.com/givps/autoset/master/sslh-fix/sl-fix"
-chmod +x sl-fix
-sl-fix
+#cd /usr/bin
+#wget -O sl-fix "https://raw.githubusercontent.com/givps/autoset/master/sslh-fix/sl-fix"
+#chmod +x sl-fix
+#sl-fix
 cd
 echo "Port 3369" >> /etc/ssh/sshd_config
 echo "Port 2269" >> /etc/ssh/sshd_config
 sed -i 's/#AllowTcpForwarding yes/AllowTcpForwarding yes/g' /etc/ssh/sshd_config
 rm -rf /etc/slowdns
 mkdir -m 777 /etc/slowdns
-wget -q -O /etc/slowdns/server.key "https://raw.githubusercontent.com/givps/autoset/master/SLDNS/server.key"
-wget -q -O /etc/slowdns/server.pub "https://raw.githubusercontent.com/givps/autoset/master/SLDNS/server.pub"
-wget -q -O /etc/slowdns/sldns-server "https://raw.githubusercontent.com/givps/autoset/master/SLDNS/sldns-server"
-wget -q -O /etc/slowdns/sldns-client "https://raw.githubusercontent.com/givps/autoset/master/SLDNS/sldns-client"
+wget -q -O /etc/slowdns/server.key "https://raw.githubusercontent.com/rizyul/devilstunnel/main/SLDNS/server.key"
+wget -q -O /etc/slowdns/server.pub "https://raw.githubusercontent.com/rizyul/devilstunnel/main/SLDNS/server.pub"
+wget -q -O /etc/slowdns/sldns-server "https://raw.githubusercontent.com/rizyul/devilstunnel/main/SLDNS/sldns-server"
+wget -q -O /etc/slowdns/sldns-client "https://raw.githubusercontent.com/rizyul/devilstunnel/main/SLDNS/sldns-client"
 cd
 chmod +x /etc/slowdns/server.key
 chmod +x /etc/slowdns/server.pub
