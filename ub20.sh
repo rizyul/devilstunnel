@@ -137,27 +137,11 @@ rm -f /etc/xray/domain
 #echo "IP=" >> /var/lib/kyt/ipvps.conf
 mkdir /var/lib/crot >/dev/null 2>&1
 echo "IP=" >> /var/lib/crot/ipvps.conf
-yellow "Add Domain for vmess/vless/trojan dll"
-#echo " "
-#read -rp "Input ur domain : " -e pp
-   # if [ -z $pp ]; then
-   #     echo -e "
-   #     Nothing input for domain!
-    #    Then a random domain will be created"
-   #else
-   #     echo "$pp" > /root/scdomain
-#	echo "$pp" > /etc/xray/scdomain
-#	echo "$pp" > /etc/xray/domain
-#	echo "$pp" > /etc/v2ray/domain
-#	echo $pp > /root/domain
- #       echo "IP=$pp" > /var/lib/SIJA/ipvps.conf
-  #  fi
-    
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
 echo -e "                ⇱ INSTALL DOMAIN ⇲            "
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
-echo "1. Use Domain Script "
-echo "2. Use Private Domain "
+echo "    1. Use Domain Script "
+echo "    2. Use Private Domain "
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 echo -e""
 read -rp "Choose Your Domain Installation : " dom 
@@ -186,8 +170,6 @@ echo "$host" >> /root/domain
 sleep 2
 rm -rf ub20.sh
 clear
-    fi
-}	
 #Instal slowdns
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "$green          Install SLDNS              $NC"
