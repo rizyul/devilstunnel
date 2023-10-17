@@ -156,7 +156,6 @@ elif test $dom -eq 2; then
 read -rp "Domain/Host: " -e host
 echo "IP=$host" >> /var/lib/kyt/ipvps.conf
  "IP=$host" >> /etc/xray/domain
-fi
 echo -e "${GREEN}Done!${NC}"
 sleep 2
 clear
@@ -164,7 +163,6 @@ echo "IP=$host" >> /var/lib/kyt/ipvps.conf
 echo "$host" >> /root/domain
 clear
 }
-
 apete_apdet() {
     apt update -y
     apt install sudo -y
