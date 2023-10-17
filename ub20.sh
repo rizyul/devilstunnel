@@ -5,7 +5,6 @@ echo -e "\033[36m# // System Request:Debian 10/Ubuntu 20.04\e[0m"
 echo -e "\033[36m# // Author: Devils Tunnel\e[0m"
 echo -e "\033[36m# // Description: Xray Multiport\e[0m"
 echo -e "\033[36m# // Whatsapp : wa.me/+6285279323958\e[0m"
-echo -e "\033[36m# // telegram: t.me/devilstunnels\e[0m"
 echo -e "\033[36m# //====================================\e[0m"
 sleep 1
 Green="\e[92;1m"
@@ -85,6 +84,7 @@ make_folder_xray() {
     rm -rf /etc/bot/.bot.db
     mkdir -p /etc/bot
     mkdir -p /etc/xray
+    mkdir -p /etc/xray/dns
     mkdir -p /etc/vmess
     mkdir -p /etc/vless
     mkdir -p /etc/trojan
@@ -133,39 +133,39 @@ clear
 author=$(cat /etc/profil)
 echo ""
 }
-
+mkdir -p /var/lib/kyt >/dev/null 2>&1
+echo "IP=" >> /var/lib/kyt/ipvps.conf
 add_domain() {
 echo -e ""
 clear
-    echo -e "   .----------------------------------."
-echo -e "   |\e[1;32mPlease Select a Domain Type Below \e[0m|"
-echo -e "   '----------------------------------'"
-echo -e "     \e[1;32m1)\e[0m Enter Your Subdomain"
-echo -e "     \e[1;32m2)\e[0m Use a Random Subdomain"
-echo -e "   ------------------------------------"
-read -p "   Please select numbers 1-2 or Any Button(Random) : " host
-echo ""
-if [[ $host == "1" ]]; then
-echo -e "   \e[1;32mPlease Enter Your Subdomain $NC"
-read -p "   Subdomain: " host1
-echo "IP=" >> /var/lib/kyt/ipvps.conf
-echo $host1 > /etc/xray/domain
-echo $host1 > /root/domain
-echo ""
-elif [[ $host == "2" ]]; then
-echo ""
-#install cf
-wget ${REPO}ssh/cf.sh && chmod +x cf.sh && ./cf.sh
-rm -f /root/cf.sh
+echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
+echo -e "                 ⇱ INSTALL DOMAIN ⇲            "
+echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
+echo "1. Use Domain Script "
+echo "2. Use Private Domain "
+echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
+echo -e""
+read -rp "Choose Your Domain Installation : " dom 
+
+if test $dom -eq 1; then
 clear
-else
-print_install "Random Subdomain/Domain is Used"
-wget ${REPO}cf.sh && chmod +x cf.sh && ./cf.sh
-rm -f /root/cf.sh
+wget -q -O /root/cf.sh "https://raw.githubusercontent.com/rizyul/deviltunnel/main/ssh/cf.sh"
+chmod +x /root/cf.sh
+./cf.sh
+elif test $dom -eq 2; then
+read -rp "Domain/Host: " -e host
+echo "IP=$host" >> /var/lib/kyt/ipvps.conf
+ "IP=$host" >> /etc/xray/domain
+fi
+echo -e "${GREEN}Done!${NC}"
+sleep 2
+clear
+echo "IP=$host" >> /var/lib/kyt/ipvps.conf
+echo "$host" >> /root/domain
 clear
     fi
  # "Installed slowdns"
-    wget -q -O /etc/nameserver "https://github.com/rizyul/tunnel/raw/main/X-SlowDNS/nameserver" && bash /etc/nameserver >/dev/null 2>&1	
+    wget -q -O /etc/nameserver "https://github.com/rizyul/devilstunnel/main/slowdns/nameserver" && bash /etc/nameserver >/dev/null 2>&1	
 }
 
 apete_apdet() {
