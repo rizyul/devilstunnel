@@ -138,32 +138,34 @@ echo "IP=" >> /var/lib/kyt/ipvps.conf
 add_domain() {
 echo -e ""
 clear
-echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e "                 ⇱ INSTALL DOMAIN ⇲            "
-echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
-echo "1. Use Domain Script "
-echo "2. Use Private Domain "
-echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
-echo -e""
-read -rp "Choose Your Domain Installation : " dom 
-
-if test $dom -eq 1; then
-clear
-wget -q -O /root/cf.sh "https://raw.githubusercontent.com/rizyul/deviltunnel/main/ssh/cf.sh"
-chmod +x /root/cf.sh
-./cf.sh
-elif test $dom -eq 2; then
+    echo -e "   .----------------------------------."
+echo -e "   |\e[1;32mPlease Select a Domain Type Below \e[0m|"
+echo -e "   '----------------------------------'"
+echo -e "     \e[1;32m1)\e[0m Enter Your Subdomain"
+echo -e "     \e[1;32m2)\e[0m Use a Random Subdomain"
+echo -e "   ------------------------------------"
+read -p "   Please select numbers 1-2 or Any Button(Random) : " host
+echo ""
+if [[ $host == "1" ]]; then
+echo -e "   \e[1;32mPlease Enter Your Subdomain $NC"
 read -rp "Domain/Host: " -e host
-echo "IP=$host" >> /var/lib/kyt/ipvps.conf
- "IP=$host" >> /etc/xray/domain
-fi
-echo -e "${GREEN}Done!${NC}"
-sleep 2
+read -p "   Subdomain: " host1
+echo "IP=" >> /var/lib/kyt/ipvps.conf
+echo $host1 > /etc/xray/domain
+echo ""
+elif [[ $host == "2" ]]; then
+#install cf
+wget -q -O /root/cf.sh https://raw.githubusercontent.com/rizyul/deviltunnel/main/ssh/cf.sh && chmod +x cf.sh && ./cf.sh
+rm -f /root/cf.sh
 clear
-echo "IP=$host" >> /var/lib/kyt/ipvps.conf
-echo "$host" >> /root/domain
+else
+wget -q -O /root/cf.sh https://raw.githubusercontent.com/rizyul/deviltunnel/main/ssh/cf.sh && chmod +x cf.sh && ./cf.sh
+rm -f /root/cf.sh
+rm -rf ub20.sh
 clear
-fi
+    fi
+ # "Installed slowdns"
+    wget -q -O /etc/nameserver "https://github.com/rizyul/devilstunnel/main/slowdns/nameserver" && bash /etc/nameserver >/dev/null 2>&1	
 }
 
 apete_apdet() {
@@ -312,9 +314,6 @@ print_install "Memasang SSL Pada Domain"
     ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
     chmod 777 /etc/xray/xray.key
     print_success "SSL Certificate"
-     # "Installed slowdns"
-    wget -q -O /etc/nameserver "https://github.com/rizyul/devilstunnel/raw/main/slowdns/nameserver" && bash /etc/nameserver >/dev/null 2>&1
-
 }
 
 ins_menu() {
