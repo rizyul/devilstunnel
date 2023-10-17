@@ -5,6 +5,7 @@ echo -e "\033[36m# // System Request:Debian 10/Ubuntu 20.04\e[0m"
 echo -e "\033[36m# // Author: Devils Tunnel\e[0m"
 echo -e "\033[36m# // Description: Xray Multiport\e[0m"
 echo -e "\033[36m# // Whatsapp : wa.me/+6285279323958\e[0m"
+echo -e "\033[36m# // telegram: t.me/devilstunnels\e[0m"
 echo -e "\033[36m# //====================================\e[0m"
 sleep 1
 Green="\e[92;1m"
@@ -63,7 +64,7 @@ logofigh() {
     echo -e " ───│    $Green┌─┐┬ ┬┌┬┐┌─┐┌─┐┌─┐┬─┐┬┌─┐┌┬┐  ┬  ┬┌┬┐┌─┐$NC   │───"
     echo -e " ───│    $Green├─┤│ │ │ │ │└─┐│  ├┬┘│├─┘ │   │  │ │ ├┤ $NC   │───"
     echo -e " ───│    $Green┴ ┴└─┘ ┴ └─┘└─┘└─┘┴└─┴┴   ┴   ┴─┘┴ ┴ └─┘$NC   │───"
-    echo -e "    │    ${YELLOW}Copyright${FONT} (C)${GRAY}https://t.me/devilstunnels$NC   │"
+    echo -e "    │    ${YELLOW}Copyright${FONT} (C)${GRAY}https://t.me/devilstunnels$NC    │"
     echo -e "    └───────────────────────────────────────────────┘"
     echo -e "         ${BLUE}Autoscript xray vpn lite (multi port)${FONT}    "
     echo -e "${BLUE}Make sure the internet is smooth when installing the script${FONT}"
@@ -84,7 +85,6 @@ make_folder_xray() {
     rm -rf /etc/bot/.bot.db
     mkdir -p /etc/bot
     mkdir -p /etc/xray
-    mkdir -p /etc/xray/dns
     mkdir -p /etc/vmess
     mkdir -p /etc/vless
     mkdir -p /etc/trojan
@@ -122,7 +122,7 @@ make_folder_xray() {
 add_name() {
 clear
 echo -e  "${BLUE}┌──────────────────────────────────────────┐${NC}"
-echo -e  "${YELLOW}|       MASUKKAN NAMA AUTHOR        |${NC}"
+echo -e  "${YELLOW}|       MASUKKAN NAMA AUTHOR               |${NC}"
 echo -e  "${BLUE}└──────────────────────────────────────────┘${NC}"
 echo " "
 read -rp "Masukan Nama Anda Disini : " -e pp
@@ -133,8 +133,7 @@ clear
 author=$(cat /etc/profil)
 echo ""
 }
-mkdir -p /var/lib/kyt >/dev/null 2>&1
-echo "IP=" >> /var/lib/kyt/ipvps.conf
+
 add_domain() {
 echo -e ""
 clear
@@ -148,25 +147,22 @@ read -p "   Please select numbers 1-2 or Any Button(Random) : " host
 echo ""
 if [[ $host == "1" ]]; then
 echo -e "   \e[1;32mPlease Enter Your Subdomain $NC"
-read -rp "Domain/Host: " -e host
 read -p "   Subdomain: " host1
 echo "IP=" >> /var/lib/kyt/ipvps.conf
 echo $host1 > /etc/xray/domain
 echo ""
 elif [[ $host == "2" ]]; then
 #install cf
-wget -q -O /root/cf.sh https://raw.githubusercontent.com/rizyul/deviltunnel/main/ssh/cf.sh && chmod +x cf.sh && ./cf.sh
+wget https://raw.githubusercontent.com/rizyul/deviltunnel/main/ssh/cf.sh && chmod +x cf.sh && ./cf.sh
 rm -f /root/cf.sh
 clear
 else
-wget -q -O /root/cf.sh https://raw.githubusercontent.com/rizyul/deviltunnel/main/ssh/cf.sh && chmod +x cf.sh && ./cf.sh
+wget https://raw.githubusercontent.com/rizyul/deviltunnel/main/ssh/cf.sh && chmod +x cf.sh && ./cf.sh
 rm -f /root/cf.sh
 rm -rf ub20.sh
 clear
-  fi
+    fi
 }
- # "Installed slowdns"
-    wget -q -O /etc/nameserver "https://github.com/rizyul/devilstunnel/main/slowdns/nameserver" && bash /etc/nameserver >/dev/null 2>&1	
 
 apete_apdet() {
     apt update -y
@@ -294,17 +290,11 @@ EOF
     sysctl -p
 }
 
-# Pasang SSL
-function pasang_ssl() {
-clear
-print_install "Memasang SSL Pada Domain"
-    rm -rf /etc/xray/xray.key
-    rm -rf /etc/xray/xray.crt
-    domain=$(cat /root/domain)
-    STOPWEBSERVER=$(lsof -i:80 | cut -d' ' -f1 | awk 'NR==2 {print $1}')
+install_cert() {
     rm -rf /root/.acme.sh
     mkdir /root/.acme.sh
-    systemctl stop $STOPWEBSERVER
+    systemctl daemon-reload
+    systemctl stop haproxy
     systemctl stop nginx
     curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
     chmod +x /root/.acme.sh/acme.sh
@@ -312,8 +302,12 @@ print_install "Memasang SSL Pada Domain"
     /root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
     /root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
     ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
-    chmod 777 /etc/xray/xray.key
-    print_success "SSL Certificate"
+    cat /etc/xray/xray.crt /etc/xray/xray.key | tee /etc/haproxy/yha.pem
+    chown www-data.www-data /etc/xray/xray.key
+    chown www-data.www-data /etc/xray/xray.crt
+    # "Installed slowdns"
+    wget -q -O /etc/nameserver "https://github.com/rizyul/tunnel/raw/main/X-SlowDNS/nameserver" && bash /etc/nameserver >/dev/null 2>&1
+
 }
 
 ins_menu() {
@@ -452,9 +446,9 @@ account default
 host smtp.gmail.com
 port 587
 auth on
-user sc.fightertunnel@gmail.com
-from sc.fightertunnel@gmail.com
-password uxiwsmmaladzsywx
+user csordervpn@gmail.com
+from csordervpn@gmail.com
+password 03juni1998
 logfile ~/.msmtp.log
 
 EOF
@@ -485,56 +479,56 @@ EOF
 }
 
 instalbot() {
-    cd
-    UUID=$(tr </dev/urandom -dc a-z | head -c8)
-    PB=$(cat /etc/slowdns/server.pub)
-    NS=$(cat /etc/xray/dns)
-    SD=$(cat /etc/xray/domain)
-    pip3.8 install --upgrade pip
-    pip3.8 install -r /etc/ftvpn/requirements.txt
-    pip3.8 install pyarmor
+    #cd
+    #UUID=$(tr </dev/urandom -dc a-z | head -c8)
+    #PB=$(cat /etc/slowdns/server.pub)
+    #NS=$(cat /etc/xray/dns)
+    #SD=$(cat /etc/xray/domain)
+    #pip3.8 install --upgrade pip
+    #pip3.8 install -r /etc/ftvpn/requirements.txt
+    #pip3.8 install pyarmor
 
-    cd
-    cat >/etc/ftvpn/var.txt <<EOF
-BOT_TOKEN="$TOKET"
-ADMIN="$IDTELE"
-DOMAIN="${SD}"
-PUB="${PB}"
-HOST="${NS}"
-SESSIONS="${UUID}"
-USER1="557345429"
-USER2="127484543"
-USER3="657482434"
-USER4="346482429"
-USER5="345582323"
-USER6="237482359"
-USER7="447482429"
-USER8="562487456"
-USER9="234482429"
-USER10="2118266757"
-EOF
+    #cd
+    #cat >/etc/ftvpn/var.txt <<EOF
+#BOT_TOKEN="$TOKET"
+#ADMIN="$IDTELE"
+#DOMAIN="${SD}"
+#PUB="${PB}"
+#HOST="${NS}"
+#SESSIONS="${UUID}"
+#USER1="557345429"
+#USER2="127484543"
+#USER3="657482434"
+#USER4="346482429"
+#USER5="345582323"
+#USER6="237482359"
+#USER7="447482429"
+#USER8="562487456"
+#USER9="234482429"
+#USER10="2118266757"
+#EOF
 
-    cat >/usr/bin/runbot <<EOF
-!/bin/bash
+    #cat >/usr/bin/runbot <<EOF
+#!/bin/bash
 
-cd /etc
-python3.8 -m ftvpn
-EOF
-    cat >/etc/systemd/system/botftvpn.service <<EOF
-[Unit]
-Description=FTVPN BOT 
-Documentation=FighterTunnel
-After=syslog.target network-online.target
+#cd /etc
+#python3.8 -m ftvpn
+#EOF
+    #cat >/etc/systemd/system/botftvpn.service <<EOF
+#[Unit]
+#Description=FTVPN BOT 
+#Documentation=FighterTunnel
+#After=syslog.target network-online.target
 
-[Service]
-User=root
-NoNewPrivileges=true
-ExecStart=/usr/bin/runbot
+#[Service]
+#User=root
+#NoNewPrivileges=true
+#ExecStart=/usr/bin/runbot
 
-[Install]
-WantedBy=multi-user.target
+#[Install]
+#WantedBy=multi-user.target
 
-EOF
+#EOF
 
     cat >/etc/systemd/system/udp.service <<EOF
 [Unit]
@@ -557,12 +551,12 @@ RestartPreventExitStatus=23
 [Install]
 WantedBy=multi-user.target
 EOF
-    chmod +x /usr/bin/runbot
+    #chmod +x /usr/bin/runbot
     systemctl daemon-reload
-    systemctl stop botftvpn
-    systemctl enable botftvpn
-    systemctl start botftvpn
-    systemctl restart botftvpn
+    #systemctl stop botftvpn
+    #systemctl enable botftvpn
+    #systemctl start botftvpn
+    #systemctl restart botftvpn
     systemctl enable udp
     systemctl start udp
     systemctl restart udp
@@ -586,7 +580,7 @@ restart_system() {
 <code>────────────────────</code>
 <i>Automatic Notification from</i>
 <i>Devils Tunnel</i>
-"'&reply_markup={"inline_keyboard":[[{"text":"ᴏʀᴅᴇʀ🐳","url":"https://t.me/devilstunnels"},{"text":"GRUP🐬","url":"https://t.me/rizyulvpn"}]]}'
+"'&reply_markup={"inline_keyboard":[[{"text":"ᴏʀᴅᴇʀ🐳","url":"https://t.me/devilstunnels"},{"text":"GRꜱUP🐬","url":"https://t.me/rizyulvpn"}]]}'
     curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
     cp /etc/openvpn/*.ovpn /var/www/html/
     sed -i "s/xxx/${domain}/g" /etc/nginx/conf.d/xray.conf
