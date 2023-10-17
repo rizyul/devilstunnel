@@ -74,8 +74,8 @@ logofigh() {
 make_folder_xray() {
     mkdir -p /etc/xray
     chown www-data.www-data /var/log/xray
-    mkdir -p /var/lib/kyt >/dev/null 2>&1
-    
+	mkdir -p /var/lib/crot >/dev/null 2>&1
+    #mkdir -p /var/lib/kyt >/dev/null 2>&1
     rm -rf /etc/vmess/.vmess.db
     rm -rf /etc/vless/.vless.db
     rm -rf /etc/trojan/.trojan.db
@@ -84,7 +84,6 @@ make_folder_xray() {
     rm -rf /etc/bot/.bot.db
     mkdir -p /etc/bot
     mkdir -p /etc/xray
-    mkdir -p /etc/xray/dns
     mkdir -p /etc/vmess
     mkdir -p /etc/vless
     mkdir -p /etc/trojan
@@ -133,41 +132,70 @@ clear
 author=$(cat /etc/profil)
 echo ""
 }
-mkdir -p /var/lib/kyt >/dev/null 2>&1
-echo "IP=" >> /var/lib/kyt/ipvps.conf
-add_domain() {
-echo -e ""
+rm -f /etc/xray/domain
+#mkdir -p /var/lib/kyt >/dev/null 2>&1
+#echo "IP=" >> /var/lib/kyt/ipvps.conf
+mkdir /var/lib/crot >/dev/null 2>&1
+echo "IP=" >> /var/lib/crot/ipvps.conf
+yellow "Add Domain for vmess/vless/trojan dll"
+#echo " "
+#read -rp "Input ur domain : " -e pp
+   # if [ -z $pp ]; then
+   #     echo -e "
+   #     Nothing input for domain!
+    #    Then a random domain will be created"
+   #else
+   #     echo "$pp" > /root/scdomain
+#	echo "$pp" > /etc/xray/scdomain
+#	echo "$pp" > /etc/xray/domain
+#	echo "$pp" > /etc/v2ray/domain
+#	echo $pp > /root/domain
+ #       echo "IP=$pp" > /var/lib/SIJA/ipvps.conf
+  #  fi
+    
+echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
+echo -e "                ⇱ INSTALL DOMAIN ⇲            "
+echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
+echo "1. Use Domain Script "
+echo "2. Use Private Domain "
+echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
+echo -e""
+read -rp "Choose Your Domain Installation : " dom 
+
+if test $dom -eq 1; then
 clear
-    echo -e "   .----------------------------------."
-echo -e "   |\e[1;32mPlease Select a Domain Type Below \e[0m|"
-echo -e "   '----------------------------------'"
-echo -e "     \e[1;32m1)\e[0m Enter Your Subdomain"
-echo -e "     \e[1;32m2)\e[0m Use a Random Subdomain"
-echo -e "   ------------------------------------"
-read -p "   Please select numbers 1-2 or Any Button(Random) : " host
-echo ""
-if [[ $host == "1" ]]; then
-echo -e "   \e[1;32mPlease Enter Your Subdomain $NC"
+wget -q -O /root/cf.sh "https://raw.githubusercontent.com/rizyul/devilstunnel/main/ssh/slhost.sh"
+chmod +x /root/slhost.sh
+./slhost.sh
+#elif test $dom -eq 2; then
+#wget -q -O /root/cf1.sh "https://raw.githubusercontent.com/rizyulstore/v4/main/cf1.sh"
+#chmod +x /root/cf1.sh
+#./cf1.sh
+elif test $dom -eq 3; then
 read -rp "Domain/Host: " -e host
-read -p "   Subdomain: " host1
-echo "IP=" >> /var/lib/kyt/ipvps.conf
-echo $host1 > /etc/xray/domain
-echo ""
-elif [[ $host == "2" ]]; then
-#install cf
-wget -q -O /root/cf.sh https://raw.githubusercontent.com/rizyul/deviltunnel/main/ssh/cf.sh && chmod +x cf.sh && ./cf.sh
-rm -f /root/cf.sh
+echo "IP=$host" >> /var/lib/crot/ipvps.conf
+ "IP=$host" >> /etc/xray/domain
+ 
+fi
+echo -e "${GREEN}Done!${NC}"
+sleep 2
 clear
-else
-wget -q -O /root/cf.sh https://raw.githubusercontent.com/rizyul/deviltunnel/main/ssh/cf.sh && chmod +x cf.sh && ./cf.sh
-rm -f /root/cf.sh
+echo "IP=$host" >> /var/lib/crot/ipvps.conf
+echo "$host" >> /root/domain
+#clear
+sleep 2
 rm -rf ub20.sh
 clear
     fi
- # "Installed slowdns"
-    wget -q -O /etc/nameserver "https://github.com/rizyul/devilstunnel/main/slowdns/nameserver" && bash /etc/nameserver >/dev/null 2>&1	
-}
-
+}	
+#Instal slowdns
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "$green          Install SLDNS              $NC"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+sleep 2
+clear
+wget https://raw.githubusercontent.com/rizyul/devilstunnel/main/SLDNS/install-sldns && chmod +x install-sldns && ./install-sldns
+clear
 apete_apdet() {
     apt update -y
     apt install sudo -y
@@ -488,12 +516,11 @@ instalbot() {
     cd
     UUID=$(tr </dev/urandom -dc a-z | head -c8)
     PB=$(cat /etc/slowdns/server.pub)
-    NS=$(cat /etc/xray/dns)
+    NS=$(cat /etc/xray/nsdomain)
     SD=$(cat /etc/xray/domain)
     pip3.8 install --upgrade pip
     pip3.8 install -r /etc/ftvpn/requirements.txt
     pip3.8 install pyarmor
-
     cd
     cat >/etc/ftvpn/var.txt <<EOF
 BOT_TOKEN="$TOKET"
@@ -557,6 +584,11 @@ RestartPreventExitStatus=23
 [Install]
 WantedBy=multi-user.target
 EOF
+
+rm -f /root/install
+rm -f /root/sl-grpc.sh
+rm -f /root/install-sldns
+rm -f /root/install-ss-plugin.sh
     chmod +x /usr/bin/runbot
     systemctl daemon-reload
     systemctl stop botftvpn

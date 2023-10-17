@@ -14,7 +14,7 @@ SUB_DOMAIN=aot-${sub}.cloudrzs.my.id
 NS_DOMAIN=aotns-${subsl}.cloudrzs.my.id
 CF_ID=prarizki9@gmail.com
 CF_KEY=8c5d17794ccaee71d0e79e09dae8fb23f3e92
-echo "IP=""$SUB_DOMAIN" >> /var/lib/crot/subdomain.conf
+echo "IP=""$SUB_DOMAIN" >> /var/lib/crot/domain.conf
 set -euo pipefail
 IP=$(wget -qO- ipv4.icanhazip.com);
 echo "Updating DNS for ${SUB_DOMAIN}..."
