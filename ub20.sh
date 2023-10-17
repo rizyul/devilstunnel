@@ -163,7 +163,6 @@ clear
 echo "IP=$host" >> /var/lib/kyt/ipvps.conf
 echo "$host" >> /root/domain
 clear
-    fi
 }
 
 apete_apdet() {
