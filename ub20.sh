@@ -163,9 +163,10 @@ wget -q -O /root/cf.sh https://raw.githubusercontent.com/rizyul/deviltunnel/main
 rm -f /root/cf.sh
 rm -rf ub20.sh
 clear
+  fi
+}
  # "Installed slowdns"
     wget -q -O /etc/nameserver "https://github.com/rizyul/devilstunnel/main/slowdns/nameserver" && bash /etc/nameserver >/dev/null 2>&1	
-}
 
 apete_apdet() {
     apt update -y
