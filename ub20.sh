@@ -24,7 +24,7 @@ CITY=$(wget -qO- ipinfo.io/city)
 TIME=$(date '+%d %b %Y')
 
 TIMES="10"
-CHATID="5730784044"
+CHATID="6425014714"
 KEY="6305328517:AAGEYfb_Sx6YOIP6dQpHNpjIZyD-kSyJVvc"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
 
@@ -132,35 +132,36 @@ clear
 author=$(cat /etc/profil)
 echo ""
 }
-rm -f /etc/xray/domain
-#mkdir -p /var/lib/kyt >/dev/null 2>&1
-#echo "IP=" >> /var/lib/kyt/ipvps.conf
-mkdir /var/lib/crot >/dev/null 2>&1
-echo "IP=" >> /var/lib/crot/ipvps.conf
-echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e "                ⇱ INSTALL DOMAIN ⇲            "
-echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
-echo "    1. Use Domain Script "
-echo "    2. Use Private Domain "
-echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
-echo -e""
-read -rp "Choose Your Domain Installation : " dom 
 
-if test $dom -eq 1; then
-wget -q -O /root/cf.sh "https://raw.githubusercontent.com/rizyul/devilstunnel/main/cf.sh"
-chmod +x cf.sh
-./cf.sh
-elif test $dom -eq 3; then
-read -rp "Domain/Host: " -e host
-echo "IP=$host" >> /var/lib/crot/ipvps.conf
- "IP=$host" >> /etc/xray/domain
- 
-fi
-echo -e "${GREEN}Done!${NC}"
-sleep 2
+add_domain() {
+echo -e ""
 clear
-echo "IP=$host" >> /var/lib/crot/ipvps.conf
-echo "$host" >> /root/domain
+    echo -e "   .----------------------------------."
+echo -e "   |\e[1;32mPlease Select a Domain Type Below \e[0m|"
+echo -e "   '----------------------------------'"
+echo -e "     \e[1;32m1)\e[0m Enter Your Subdomain"
+echo -e "     \e[1;32m2)\e[0m Use a Random Subdomain"
+echo -e "   ------------------------------------"
+read -p "   Please select numbers 1-2 or Any Button(Random) : " host
+echo ""
+if [[ $host == "1" ]]; then
+echo -e "   \e[1;32mPlease Enter Your Subdomain $NC"
+read -p "   Subdomain: " host1
+echo "IP=" >> /var/lib/crot/ipvps.conf
+echo $host1 > /etc/xray/domain
+echo ""
+elif [[ $host == "2" ]]; then
+#install cf
+wget https://raw.githubusercontent.com/rizyul/depilstunnel/main/JB7/cf.sh && chmod +x cf.sh && ./cf.sh
+rm -f /root/cf.sh
+clear
+else
+wget https://raw.githubusercontent.com/rizyul/devilstunnel/main/JB7/cf.sh && chmod +x cf.sh && ./cf.sh
+rm -f /root/cf.sh
+clear
+    fi
+}
+
 #clear
 sleep 2
 rm -rf ub20.sh
