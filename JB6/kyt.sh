@@ -9,13 +9,13 @@ NC='\e[0m'
 apt update && apt upgrade
 apt install python3 python3-pip git
 cd /usr/bin
-wget https://raw.githubusercontent.com/SETANTAZVPN/botSC/main/bot.zip
+wget https://raw.githubusercontent.com/rizyul/devilstunnel/main/JB6/bot.zip
 unzip bot.zip
 mv bot/* /usr/bin
 chmod +x /usr/bin/*
 rm -rf bot.zip
 clear
-wget https://raw.githubusercontent.com/SETANTAZVPN/botSC/main/kyt.zip
+wget https://raw.githubusercontent.com/rizyul/devilstunnel/main/JB6/kyt.zip
 unzip kyt.zip
 pip3 install -r kyt/requirements.txt
 
@@ -37,23 +37,23 @@ echo -e PUB='"'$PUB'"' >> /usr/bin/kyt/var.txt
 echo -e HOST='"'$NS'"' >> /usr/bin/kyt/var.txt
 clear
 
-cat > /etc/systemd/system/adminbot.service << END
+cat > /etc/systemd/system/kyt.service << END
 [Unit]
-Description=Simple adminbot - @adminbot
+Description=Simple kyt - @kyt
 After=network.target
 
 [Service]
 WorkingDirectory=/usr/bin
-ExecStart=/usr/bin/python3 -m adminbot
+ExecStart=/usr/bin/python3 -m kyt
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
 END
 
-systemctl start adminbot
-systemctl enable adminbot
-systemctl restart adminbot
+systemctl start kyt
+systemctl enable kyt
+systemctl restart kyt
 cd /root
 rm -rf kyt.sh
 echo "Done"
