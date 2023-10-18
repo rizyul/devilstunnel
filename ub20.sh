@@ -133,10 +133,7 @@ author=$(cat /etc/profil)
 echo ""
 }
 
-add_domain() {
-echo -e ""
-clear
-    echo -e "   .----------------------------------."
+echo -e "   .----------------------------------."
 echo -e "   |\e[1;32mPlease Select a Domain Type Below \e[0m|"
 echo -e "   '----------------------------------'"
 echo -e "     \e[1;32m1)\e[0m Enter Your Subdomain"
@@ -160,7 +157,6 @@ wget https://raw.githubusercontent.com/rizyul/devilstunnel/main/JB7/cf.sh && chm
 rm -f /root/cf.sh
 clear
     fi
-}
 
 #clear
 sleep 2
