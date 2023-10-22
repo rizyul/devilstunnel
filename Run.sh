@@ -137,7 +137,7 @@ rm -f /etc/xray/domain
 #echo "IP=" >> /var/lib/kyt/ipvps.conf
 mkdir /var/lib/crot >/dev/null 2>&1
 echo "IP=" >> /var/lib/crot/ipvps.conf
-yellow "Add Domain for vmess/vless/trojan dll"
+echo -e "Add Domain for vmess/vless/trojan dll"
 #echo " "
 #read -rp "Input ur domain : " -e pp
    # if [ -z $pp ]; then
@@ -168,10 +168,6 @@ wget -q -O /root/cf.sh "https://raw.githubusercontent.com/rizyul/devilstunnel/ma
 chmod +x /root/slhost.sh
 ./slhost.sh
 elif test $dom -eq 2; then
-wget -q -O /root/cf1.sh "https://raw.githubusercontent.com/rizyulstore/v4/main/cf1.sh"
-chmod +x /root/cf1.sh
-./cf1.sh
-elif test $dom -eq 3; then
 read -rp "Domain/Host: " -e host
 echo "IP=$host" >> /var/lib/crot/ipvps.conf
  "IP=$host" >> /etc/xray/domain
