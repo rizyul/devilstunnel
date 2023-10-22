@@ -180,7 +180,6 @@ echo "IP=$host" >> /var/lib/crot/ipvps.conf
 echo "$host" >> /root/domain
 #clear
 sleep 2
-rm -rf ub20.sh
 clear
     fi
 }	
