@@ -202,8 +202,6 @@ echo "$host" >> /root/domain
 sleep 2
 rm -rf ub20.sh
 clear
-    fi
-}	
 # Pasang SSL
 function pasang_ssl() {
 clear
